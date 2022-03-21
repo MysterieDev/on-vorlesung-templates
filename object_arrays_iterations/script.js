@@ -5,12 +5,13 @@ const employee = {
     rolle: 'azubi',
     rechtelevel: 1,
 }
-for(const attr in employee){
-    console.log('name: ' + attr + " | wert: " + employee[attr]);
-}
-console.table(employee)
+
 showEmployee(employee);
 
 
 const todos = ["abwasch", "bei der vorlesung nichts zocken", "inta abschalten", "js lernen"]
-showTodos(todos);
+const moreWeirdTodos = [23.75, true, false, [1, 2], {a: "one", b: 'two'}]
+
+showTodos(todos, 'todos');
+
+showTodos(moreWeirdTodos, 'weirdTodos');

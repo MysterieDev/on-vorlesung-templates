@@ -14,20 +14,20 @@ function destructureAttrs(employeeObj){
     }
     return fragment
 }
-function showTodos(todos){
-    document.getElementById('todos').innerHTML = 
+function showTodos(todos, id){
+    document.getElementById(id).innerHTML = 
  '<ol>'+   
 todos.reduce((fragment, todo, index)=> index === 1 ? `
 <li>
     ${String(fragment)}
 </li>
 <li>
-    ${String(todo)}
+    ${typeof todo !== 'object' ? String(todo): String(JSON.stringify(todo))}
 </li>
 `:
 fragment.concat(`
 <li>
-    ${String(todo)}
+${typeof todo !== 'object' ? String(todo): String(JSON.stringify(todo))}
 </li>`));
 +'</ol>'
 }

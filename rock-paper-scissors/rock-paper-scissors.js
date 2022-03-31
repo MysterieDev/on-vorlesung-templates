@@ -2,6 +2,8 @@ let selectedChoice;
 let enemyChoice;
 
 const allPlayerChoices = document.querySelectorAll('.choice');
+const enemy = document.querySelector('#enemy');
+const btn = document.querySelector('#startButton');
 
 const choices = ["rock", "paper", "scissors"];
 
@@ -11,8 +13,8 @@ const winsAgainstObject = {
     scissors: "paper",
 };
 
-function playTheGame(enemyChoice){
-
+function playTheGame(){
+    enemyTurn();
     if(!selectedChoice){
         console.log("pls pick a choice")
         return;
@@ -37,6 +39,13 @@ for(let choice of allPlayerChoices){
 function selectChoice(e){
     selectedChoice = e.target.id;
     markSelectedChoice(e.target);
+    activateStartButton();
+}
+
+function activateStartButton(){
+    btn.disabled = false;
+    btn.textContent = 'Start game';
+    btn.onclick = playTheGame;
 }
 
 function markSelectedChoice(imgEl){
@@ -53,6 +62,7 @@ function removeSelection(){
 function enemyTurn(){
     const choiceNumber = getRandomInt(); // 0, 1 oder 2
     enemyChoice = choices[choiceNumber];
+    enemy.src = enemyChoice + '.png';
 }
 
 function getRandomInt(){

@@ -4,6 +4,11 @@ let enemyChoice;
 const allPlayerChoices = document.querySelectorAll('.choice');
 const enemy = document.querySelector('#enemy');
 const btn = document.querySelector('#startButton');
+const resultMessage = document.querySelector('#resultMessage');
+
+const scoreWon = document.querySelector('#won');
+const scoreDraw = document.querySelector('#draw');
+const scoreLost = document.querySelector('#lost');
 
 const choices = ["rock", "paper", "scissors"];
 
@@ -13,23 +18,45 @@ const winsAgainstObject = {
     scissors: "paper",
 };
 
+const scoreboard ={
+    won: 0,
+    draw: 0,
+    lost: 0
+}
+
 function playTheGame(){
-    enemyTurn();
+
     if(!selectedChoice){
-        console.log("pls pick a choice")
+        alert("pls pick a choice")
         return;
     }
 
+    enemyTurn();
+
     if(winsAgainstObject[selectedChoice] === enemyChoice){
-        console.log("you win");
+        setMessage('YOU WIN');
+        scoreboard.won = scoreboard.won + 1
     }
     if(selectedChoice === enemyChoice){
-        console.log("you have a draw");
+        setMessage('DRAW');
+        scoreboard.draw = scoreboard.draw + 1
     }
     if(winsAgainstObject[enemyChoice] === selectedChoice){
-        console.log("you lost");
+        setMessage('YOU LOST');
+        scoreboard.lost = scoreboard.lost + 1
     }
 
+    setScoreboard();
+}
+
+function setMessage(msg){
+    resultMessage.innerHTML = msg
+}
+
+function setScoreboard(){
+    scoreWon.innerHTML = scoreboard.won;
+    scoreDraw.innerHTML = scoreboard.draw;
+    scoreLost.innerHTML = scoreboard.lost;
 }
 
 for(let choice of allPlayerChoices){
@@ -45,7 +72,7 @@ function selectChoice(e){
 function activateStartButton(){
     btn.disabled = false;
     btn.textContent = 'Start game';
-    btn.onclick = playTheGame;
+    btn.onclick = playTheGame; //btn.addEventListener('click, playTheGame)
 }
 
 function markSelectedChoice(imgEl){

@@ -45,7 +45,7 @@ function makeTwoColumns(){
     }
 }
 
-function makeOneColumns(){
+function makeOneColumn(){
     if(postContainer.classList.contains('three')){
         postContainer.classList.replace('three', 'one');
     }

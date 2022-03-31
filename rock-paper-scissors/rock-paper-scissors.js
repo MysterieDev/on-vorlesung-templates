@@ -1,8 +1,9 @@
 let selectedChoice;
+let enemyChoice;
 
 const allPlayerChoices = document.querySelectorAll('.choice');
 
-const choices = ["rock", "paper", "scissors"]
+const choices = ["rock", "paper", "scissors"];
 
 const winsAgainstObject = {
     rock: "scissors",
@@ -39,5 +40,21 @@ function selectChoice(e){
 }
 
 function markSelectedChoice(imgEl){
+    removeSelection();
     imgEl.parentElement.classList.add('selected');
+}
+
+function removeSelection(){
+    for(let choice of allPlayerChoices){
+        choice.parentElement.classList.remove('selected');
+    }
+}
+
+function enemyTurn(){
+    const choiceNumber = getRandomInt(); // 0, 1 oder 2
+    enemyChoice = choices[choiceNumber];
+}
+
+function getRandomInt(){
+    return Math.floor(Math.random()*choices.length); // 2.99999999999999 --> 2
 }

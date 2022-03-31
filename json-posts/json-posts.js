@@ -1,3 +1,4 @@
+const postContainer = document.querySelector('#postWrapper');
 function loadPosts(){
     return fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
     .then((res) => res.json())
@@ -5,6 +6,23 @@ function loadPosts(){
 }
 
 function addPostsToSite(){
-    loadPosts().then(posts => console.log(posts));
+    loadPosts().then(posts => {
+        for(let post of posts){
+            const newPost = document.createElement("div");
+            newPost.classList.add('column');
+            newPost.innerHTML = `
+            <div class="ui card">
+                <div class="content">
+                    <div class="header"></div>
+                    <div class="description">
+                        <button class="ui secondary button">read more</button>
+                    </div>
+                </div>
+            </div>
+            `;
+
+            postContainer.appendChild(newPost);
+        } 
+    });
 
 }
